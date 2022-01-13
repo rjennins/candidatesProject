@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.recruitco.candidates.model.Candidate;
+import com.recruitco.candidates.model.Skill;
 import com.recruitco.candidates.repository.CandidateRepository;
 
 @RunWith(SpringRunner.class)
@@ -51,19 +53,20 @@ public class CandidatesRestControllerIntegrationTest {
 
 	@Test
 	public void whenCandidateExists_thenDeleteCandidate() throws IOException, Exception {
-		Candidate fred = new Candidate("fred", "Fishing", "linked.co.uk/bob", null);
+		Candidate fred = new Candidate("fred", "Fishing", "linked.co.uk/fred",
+				Arrays.asList(new Skill("java", "2 years"), new Skill("Angular", "3 years")));
 		mvc.perform(
 				post("/candidates").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(fred)));
 		Candidate found = repository.findByName("fred");
 		assertThat(found.getName().equals(fred.getName())).isTrue();
 		mvc.perform(delete("/candidates/{id}", found.getId()).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-        mvc.perform(get("/candidates/{name}", "fred").contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().isNotFound());
+		mvc.perform(get("/candidates/{name}", "fred").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
 	}
 
-    private void createTestCandidate(String name) {
-        Candidate candidate = new Candidate(name, null, null, null);
-        repository.save(candidate);
-    }
+	private void createTestCandidate(String name) {
+		Candidate candidate = new Candidate(name, null, null, null);
+		repository.save(candidate);
+	}
 }
