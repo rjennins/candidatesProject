@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.recruitco</groupId>
 	<artifactId>candidates</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Recruitco Information</name>
 	<description>Interview Recruitco Demo</description>
 
@@ -97,6 +97,13 @@
 			<version>0.8.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.21.0</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -120,7 +127,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<!--  version>${jacoco.version}</version -->
+				<!-- version>${jacoco.version}</version -->
 				<version>0.8.7</version>
 				<executions>
 					<execution>
