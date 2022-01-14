@@ -54,7 +54,7 @@ public class CandidatesRestControllerIntegrationTest {
 	@Test
 	public void whenCandidateExists_thenDeleteCandidate() throws IOException, Exception {
 		Candidate fred = new Candidate("fred", "Fishing", "linked.co.uk/fred",
-				Arrays.asList(new Skill("java", "2 years"), new Skill("Angular", "3 years")));
+				Arrays.asList(new Skill("java"), new Skill("Angular")));
 		mvc.perform(
 				post("/candidates").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(fred)));
 		Candidate found = repository.findByName("fred");

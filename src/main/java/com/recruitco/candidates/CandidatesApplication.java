@@ -52,25 +52,25 @@ public class CandidatesApplication {
 		return args -> {
 			Stream.of(
 					new Candidate("Jon Smith", "Cricket", "linked.co.uk/js",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("React", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("React"))),
 					new Candidate("Jane Jones", "Tennis", "linked.co.uk/jj",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("Angular", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("Angular"))),
 					new Candidate("Susan White", "Badminton", "linked.co.uk/sw",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("react"))),
 					new Candidate("Harry Brown", "Cooking", "linked.co.uk/hb",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("react"))),
 					new Candidate("Steve Black", "Cycling", "linked.co.uk/sb",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("react"))),
 					new Candidate("Jeff Blue", "Running", "linked.co.uk/jb",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("react"))),
 					new Candidate("Mary Fields", "Swimming", "linked.co.uk/mf",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("unix", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("unix"))),
 					new Candidate("Peter Streeter", "Skiing", "linked.co.uk/ps",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("react"))),
 					new Candidate("Emily Lane", "Climbing", "linked.co.uk/el",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))),
+							Arrays.asList(new Skill("java"), new Skill("react"))),
 					new Candidate("Fred Green", "Painting", "linked.co.uk/fg",
-							Arrays.asList(new Skill("java", "2 years"), new Skill("react", "3 years"))))
+							Arrays.asList(new Skill("java"), new Skill("react"))))
 					.forEach(candidate -> {
 						candidateRepository.save(candidate);
 					});

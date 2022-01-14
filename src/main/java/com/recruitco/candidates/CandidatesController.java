@@ -35,7 +35,6 @@ public class CandidatesController {
 	@ApiOperation(value = "Get details for all candidates")
 	@GetMapping("/candidates")
 	public ResponseEntity<Iterable<Candidate>> candidates() {
-
 		try {
 			Iterable<Candidate> candidates = candidateService.getAllCandidates();
 			if (candidates != null) {
