@@ -1,9 +1,10 @@
-package com.recruitco.candidates;
+package com.recruitco.candidates.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recruitco.candidates.model.Candidate;
@@ -21,6 +23,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "candidates")
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class CandidatesController {
 
@@ -34,9 +37,12 @@ public class CandidatesController {
 	 */
 	@ApiOperation(value = "Get details for all candidates")
 	@GetMapping("/candidates")
-	public ResponseEntity<Iterable<Candidate>> candidates() {
+	public ResponseEntity<Iterable<Candidate>> candidates(
+			@RequestParam(defaultValue = "0") Integer pageNo, 
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
 		try {
-			Iterable<Candidate> candidates = candidateService.getAllCandidates();
+			Iterable<Candidate> candidates = candidateService.getAllCandidates(pageNo, pageSize, sortBy);
 			if (candidates != null) {
 				return ResponseEntity.status(HttpStatus.OK).body(candidates);
 			} else {

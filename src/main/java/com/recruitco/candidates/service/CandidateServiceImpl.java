@@ -1,5 +1,11 @@
 package com.recruitco.candidates.service;
 
+import java.util.ArrayList;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +23,14 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public Iterable<Candidate> getAllCandidates() {
-		return this.candidateRepository.findAll();
+	public Iterable<Candidate> getAllCandidates(Integer pageNo, Integer pageSize, String sortBy) {
+		Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+		Page<Candidate> pagedResult = this.candidateRepository.findAll(paging);
+		if (pagedResult.hasContent()) {
+			return pagedResult.getContent();
+		} else {
+			return new ArrayList<Candidate>();
+		}
 	}
 
 	@Override

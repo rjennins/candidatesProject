@@ -10,7 +10,7 @@ import com.recruitco.candidates.model.Candidate;
 @Validated
 public interface CandidateService {
 
-    @NotNull Iterable<Candidate> getAllCandidates();
+    @NotNull Iterable<Candidate> getAllCandidates(Integer pageNo, Integer pageSize, String sortBy);
 
     Candidate getCandidate(String name);
     

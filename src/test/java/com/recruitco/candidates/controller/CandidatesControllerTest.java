@@ -1,4 +1,4 @@
-package com.recruitco.candidates;
+package com.recruitco.candidates.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.recruitco.candidates.CandidatesApplication;
 import com.recruitco.candidates.model.Candidate;
 import com.recruitco.candidates.model.Skill;
 import com.recruitco.candidates.repository.CandidateRepository;
@@ -32,7 +33,7 @@ import com.recruitco.candidates.repository.CandidateRepository;
 @AutoConfigureMockMvc
 @EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 @AutoConfigureTestDatabase
-public class CandidatesRestControllerIntegrationTest {
+public class CandidatesControllerTest {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
@@ -64,9 +65,11 @@ public class CandidatesRestControllerIntegrationTest {
 		mvc.perform(get("/candidates/{name}", "fred").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
-
-	private void createTestCandidate(String name) {
-		Candidate candidate = new Candidate(name, null, null, null);
-		repository.save(candidate);
+	
+	@Test
+	public void whenNotFound_thenStatusNotFound() throws Exception {
+	    mvc.perform(get("/candidates/{name}", "xxxx")
+	      .contentType(MediaType.APPLICATION_JSON))
+	      .andExpect(status().isNotFound());
 	}
 }
