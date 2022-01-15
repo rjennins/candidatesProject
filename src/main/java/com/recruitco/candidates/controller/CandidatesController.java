@@ -31,7 +31,7 @@ public class CandidatesController {
 	private CandidateService candidateService;
 
 	/**
-	 * Get all the candidates data the URL is http:localhost:8080/candidates
+	 * Get all the candidates data the URL is http:localhost:8080/candidates.
 	 * 
 	 * @return full set of candidate data
 	 */
@@ -53,28 +53,37 @@ public class CandidatesController {
 		}
 	}
 
+	/**
+	 * Updates the candidate for the given id.
+	 * 
+	 * @param id
+	 * @return candidate data
+	 */
+	@ApiOperation(value = "Gets candidate details for a given id")
 	@PutMapping("/candidates/{id}")
 	Candidate replaceCandidate(@RequestBody Candidate newCandidate, @PathVariable Long id) {
 		return candidateService.update(newCandidate, id);
 	}
 
 	/**
-	 * Creates the candidate data
+	 * Creates a candidate.
 	 * 
 	 * @param name
 	 * @return success or failure message
 	 */
+	@ApiOperation(value = "Create a candidate")
 	@PostMapping("/candidates")
 	Candidate createNewCandidate(@RequestBody Candidate candidate) {
 		return candidateService.create(candidate);
 	}
 
 	/**
-	 * Delete the candidate data from the in memory database
+	 * Delete the candidate for a given id.
 	 * 
 	 * @param id
 	 * @return success or failure message
 	 */
+	@ApiOperation(value = "Deletes a candidate for a given id")
 	@DeleteMapping("/candidates/{id}")
 	ResponseEntity<?> deleteCandidate(@PathVariable Long id) {
 		try {
@@ -86,11 +95,12 @@ public class CandidatesController {
 	}
 
 	/**
-	 * Gets the candidate data for the given candidate name. An example URL is
+	 * Gets the candidate data for the given candidate name.
 	 * 
 	 * @param name
 	 * @return candidate data
 	 */
+	@ApiOperation(value = "Gets candidate derails for a given name")
 	@RequestMapping(value = "/candidates/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Candidate> getCandidateData(@PathVariable String name) {
 
