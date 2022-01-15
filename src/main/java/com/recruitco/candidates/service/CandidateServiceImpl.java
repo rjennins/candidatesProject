@@ -18,8 +18,8 @@ public class CandidateServiceImpl implements CandidateService {
 
 	private CandidateRepository candidateRepository;
 
-	public CandidateServiceImpl(CandidateRepository orderRepository) {
-		this.candidateRepository = orderRepository;
+	public CandidateServiceImpl(CandidateRepository candidateRepository) {
+		this.candidateRepository = candidateRepository;
 	}
 
 	@Override
